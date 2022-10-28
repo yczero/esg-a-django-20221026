@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.shortcuts import render, redirect
 from diary.models import Memory
 from diary.forms import MemoryForm
@@ -12,25 +13,55 @@ def mem_index(request):
 
 
 def mem_detail(request, pk):
-    post = Memory.objects.get(pk=pk)  # 값 그자체 keyword??
-    return render(request, 'diary/mem_detail.html', {'post': post, })
+    memory = Memory.objects.get(pk=pk)  # 값 그자체 keyword??
+    return render(request, 'diary/mem_detail.html', {'memory': memory, })
 
 
 def mem_new(request):
-    # print("request.method = " , request.method)
-    # print("request.post = " , request.POST)
-    if request.method == "GET": # POST
-        form = MemoryForm()
-    else:
+    if request.method == "POST":
         form = MemoryForm(request.POST)
-        if form.is_valid():  # 유효성 검사?? 통과한 값들이 저장된 dict
+        if form.is_valid():
             # form.cleaned_data
-            post = form.save()  # ModelForm  에서 지원
-            # return redirect('/blog/')
-            # return redirect(f"/blog/{ post.pk }/")
-            # return redirect(post.get_absolute_url())
-            return redirect(post)
-          # return redirect ( f"/diary/{memomry.pk}/")
-          # return redirect ( memomry.get_absolute_url())
+            memory: Memory = form.save()
 
-    return render(request, "diary/mem_new.html", {'form': form, })
+            messages.success(request, "메모리를 생성")
+            # return redirect(f"/diary/{memory.pk}/")
+            # return redirect(memory.get_absolute_url())
+            return redirect(memory)
+    else:
+        form = MemoryForm()
+
+    return render(request, "diary/mem_new.html", {
+        "form": form,
+    })
+
+
+def mem_edit(request, pk):
+    memory = Memory.objects.get(pk=pk)
+
+    if request.method == "POST":
+        form = MemoryForm(request.POST, instance=memory)
+        if form.is_valid():
+            messages.success(request, "메모리를 저장")
+            # form.cleaned_data
+            memory = form.save()
+            # return redirect(f"/diary/{memory.pk}/")
+            # return redirect(memory.get_absolute_url())
+            return redirect(memory)
+    else:
+        form = MemoryForm(instance=memory)
+
+    return render(request, "diary/mem_new.html", {
+        "form": form,
+    })
+
+
+def mem_delete(request, pk):
+    memory = Memory.objects.get(pk=pk)
+
+    if request.method == "POST":
+        memory.delete()
+        messages.success(request, "메모리를 삭제")
+        return redirect("/diary/")
+
+    return render(request, 'diary/mem_confirm_delete.html', {'memory': memory, })

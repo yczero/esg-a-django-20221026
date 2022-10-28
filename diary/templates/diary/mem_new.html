@@ -1,30 +1,12 @@
-{#<h2>새 포스팅 쓰기 </h2>#}
-{#<form acion =" " method = "post" novalidate>#}
-{#    {% csrf_token %}#}
-{#        <table>#}
-{#            {{ form.as_table  }}#}
-{#        </table>#}
-{#        <input type="submit" />#}
-{#</form> #}
-<!doctype html>
-<html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>memory list</title>
-</head>
-<body>
+{%  extends "diary/base.html" %}
+{%  load django_bootstrap5 %}
+{% block content %}
     <h1>다이어리</h1>
 
     <form action="" method="post" novalidate>
         {% csrf_token %}
-        <table>
-            {{ form.as_table }}
-        </table>
-        <input type="submit" />
+        {% bootstrap_form form %}
+            <input type="submit" class = "btn btn-primary"/>
     </form>
 
-</body>
-</html>
+{% endblock %}

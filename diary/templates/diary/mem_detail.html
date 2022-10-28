@@ -1,26 +1,13 @@
-<!DOCTYPE html>
-<html lang="ko">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ post.title }} - diary </title>
-</head>
-
-<body>
-    <nav>
-        <a href = "/diary/"> diary home</a>
-    </nav>
-    <h2>{{ post.title }}</h2>
-    <h4>{{ post.created_at }}</h4>
-    <p>{{ post.message }}</p>
+{%  extends "diary/base.html" %}
+{%  block content %}
+    <h2>{{ memory.title }}</h2>
+    <h4>{{ memory.created_at }}</h4>
+    <p>{{ memory.message }}</p>
+{#    {{ memory.content }}#}
     <hr/>
     
     <h3>여기 댓글이 들어옴?? </h3>
-
-
-</body>
-
-</html>
-
+    <a href="/diary/{{ memory.pk }}/edit/">Edit</a>
+    <a href="/diary/{{ memory.pk }}/delete/">del</a>
+    <a href="/diary/">Go to list</a>
+{% endblock %}

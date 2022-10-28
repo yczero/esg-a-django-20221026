@@ -1,18 +1,5 @@
-<!DOCTYPE html>
-<html lang="ko">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>django</title>
-</head>
-
-<body>
-
-    <h1> django </h1>
-
-
+{%  extends "diary/base.html" %}
+{%  block content %}
     {% for mem in mem_list %}
     <hr/>
         <h2>
@@ -28,7 +15,4 @@
 
     <hr/>
     <a href="/diary/new/"> 새 memory 쓰기 </a> 
-
-</body>
-
-</html>
+{% endblock %}
