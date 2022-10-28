@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>django</title>
+</head>
+
+<body>
+
+    <h1> django </h1>
+
+
+    {% for mem in mem_list %}
+    <hr/>
+        <h2>
+            <a href="{{ mem.get_absolute_url }}"> 
+
+            {{ mem.title }}
+            </a>
+        </h2>
+        <h4>{{ mem.created_at }}</h4>
+        <p>{{ mem.message }}</p>
+
+    {% endfor %}
+
+    <hr/>
+    <a href="/diary/new/"> 새 memory 쓰기 </a> 
+
+</body>
+
+</html>

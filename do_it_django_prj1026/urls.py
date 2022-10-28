@@ -26,5 +26,6 @@ def root(request):
 urlpatterns = [
     path('', root),
     path('blog/', include('blog.urls')),
+    path('diary/', include('diary.urls')),
     path("admin/", admin.site.urls),
 ]
