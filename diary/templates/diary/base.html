@@ -13,20 +13,35 @@
 </head>
 
 <body>
-{%  if messages %}
-    {% for message in messages %}
-        <li>
-            {{ message.tags }}
-            {{ message }}
-        </li>
-    {% endfor %}
-{%  endif %}
-    <h1> diary </h1>
-    {% block content %}
+<div class="container">
+    <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+        <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
 
-     {% endblock %}
+            <span class="fs-4">django diary</span>
+        </a>
+
+        <ul class="nav nav-pills">
+            <li class="nav-item"><a href="/blog/" class="nav-link">blog</a></li>
+            <li class="nav-item"><a href="/diary" class="nav-link">diary</a></li>
+
+        </ul>
+    </header>
+</div>
+<div class="container">
+{%  bootstrap_messages %}
+{#    {%  if messages %}#}
+{#        {% for message in messages %}#}
+{#            <li>#}
+{#                {{ message.tags }}#}
+{#                {{ message }}#}
+{#            </li>#}
+{#        {% endfor %}#}
+{#    {%  endif %}#}
+
+        {% block content %} {% endblock %}
     <hr/>
     &copy; 2022. C company.
+</div>
     {%  bootstrap_javascript %}
 </body>
 
