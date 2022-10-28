@@ -1,0 +1,12 @@
+{% extends "accounts/base.html" %}
+{% load django_bootstrap5 %}
+<h2>login</h2>
+{% block content %}
+<form action="" method="post">
+    {% csrf_token %}
+    <table>
+        {{ form.as_table }}
+    </table>
+    <input type="submit" value="Login" />
+</form>
+{% endblock %}
